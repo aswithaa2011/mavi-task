@@ -13,19 +13,19 @@ import heroImg from '../assets/hero.png';
 
 const SAMPLE_GROUPS = [
   { id: 1, name: 'CSK Cricket team', icon: '🏏', summary: 'Ticket fees & match expenses', amount: 3500, image: img4 },
-  { id: 2, name: 'Goa Trip',         icon: '🏖️', summary: 'Travel and stay',              amount: 12400 },
-  { id: 3, name: 'Roommates',        icon: '🏠', summary: 'Rent and utilities',            amount: 8000 },
-  { id: 4, name: 'Birthday Party',   icon: '🎉', summary: 'Decoration & food',             amount: 5200 },
+  { id: 2, name: 'Goa Trip', icon: '🏖️', summary: 'Travel and stay', amount: 12400 },
+  { id: 3, name: 'Roommates', icon: '🏠', summary: 'Rent and utilities', amount: 8000 },
+  { id: 4, name: 'Birthday Party', icon: '🎉', summary: 'Decoration & food', amount: 5200 },
 ];
 
 export default function Dashboard() {
-  const [profile, setProfile]           = useState(null);
-  const [userId, setUserId]             = useState(null);
-  const [loadingProfile, setLoading]    = useState(true);
-  const [expenses, setExpenses]         = useState([]);
+  const [profile, setProfile] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [loadingProfile, setLoading] = useState(true);
+  const [expenses, setExpenses] = useState([]);
   const [isSummaryOpen, setSummaryOpen] = useState(false);
-  const [activeTab, setActiveTab]       = useState('groups');
-  const [greeting, setGreeting]         = useState('');
+  const [activeTab, setActiveTab] = useState('groups');
+  const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     const h = new Date().getHours();
@@ -42,7 +42,7 @@ export default function Dashboard() {
         if (authError || !authData?.user) {
           // No active session → show mock profile so UI still renders
           console.log('No session — using mock profile.');
-          setProfile({ name: 'Aswith Kumar', avatar_url: img3 });
+          setProfile({ name: 'Aswitha', avatar_url: img3 });
           setLoading(false);
           return;
         }
@@ -160,9 +160,9 @@ export default function Dashboard() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-4 mb-8 animate-fadeInUp delay-100">
           {[
-            { label: 'Total Spent',   value: `₹${total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`, icon: '💸', color: 'text-purple-400', badge: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
-            { label: 'Active Groups', value: SAMPLE_GROUPS.length,  icon: '👥', color: 'text-cyan-400',   badge: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
-            { label: 'Transactions',  value: expenses.length,        icon: '📋', color: 'text-amber-400',  badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+            { label: 'Total Spent', value: `₹${total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`, icon: '💸', color: 'text-purple-400', badge: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
+            { label: 'Active Groups', value: SAMPLE_GROUPS.length, icon: '👥', color: 'text-cyan-400', badge: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
+            { label: 'Transactions', value: expenses.length, icon: '📋', color: 'text-amber-400', badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
           ].map(s => (
             <div key={s.label} className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 hover:bg-white/[0.07] transition-colors">
               <div className="flex items-center justify-between mb-3">
@@ -183,15 +183,14 @@ export default function Dashboard() {
             {/* Tabs */}
             <div className="animate-fadeInUp delay-200 inline-flex gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08] mb-5">
               {[
-                { key: 'groups',   label: '👥 Groups' },
+                { key: 'groups', label: '👥 Groups' },
                 { key: 'expenses', label: '🧾 My Expenses' },
               ].map(t => (
                 <button key={t.key} onClick={() => setActiveTab(t.key)}
-                  className={`px-5 py-2 rounded-lg text-xs font-semibold transition-all ${
-                    activeTab === t.key
+                  className={`px-5 py-2 rounded-lg text-xs font-semibold transition-all ${activeTab === t.key
                       ? 'bg-gradient-to-r from-violet-600 to-purple-500 text-white shadow-lg shadow-violet-500/20'
                       : 'text-slate-500 hover:text-slate-300'
-                  }`}>
+                    }`}>
                   {t.label}
                 </button>
               ))}
